@@ -1,3 +1,4 @@
+import os
 import threading
 
 import discord
@@ -19,7 +20,8 @@ async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong!{interaction.client.latency * 1000:.2f}ms", ephemeral=True)
 
 def run_flask():
-    app.run(debug=False, use_reloader=False)
+    port = int(os.getenv("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
 
 if __name__ == "__main__":
     init()
